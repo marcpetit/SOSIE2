@@ -1,0 +1,58 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}     % to use a latin keyboard
+\usepackage[T1]{fontenc}        % idem
+\usepackage[francais]{babel}    % to say we use french language
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{textcomp}
+\usepackage{hyperref}
+\lstset{frame=tblr,rulesep=1mm,framesep=2mm,framerule=1pt,xrightmargin=10mm,
+        xleftmargin=20mm,
+        rulecolor={\color[gray]{0.6}},
+        rulesepcolor={\color[gray]{0.9}},
+        texcl=true,
+        literate={é}{{\'e}}1
+                 {É}{{\'E}}1
+				 {è}{{\`e}}1
+				 {à}{{\`a}}1
+				 {À}{{\`A}}1
+        }
+\title{Architecture logicielle\\
+		\\
+		Projet SOSIE2\\
+		\\
+		Conventions de codage}
+\author{Enseignant : Marc PETIT\\
+		Promotion IATIC5 (2017-2018)\\
+		\\
+        Institut des Sciences et Techniques des Yvelines\\
+        Université de Versailles Saint-Quentin-en-Yvelines\\
+		\\
+        }
+\begin{document}
+\maketitle
+\chapter*{Présentation}
+Ce document a pour visée de présenter, fixer et normaliser les conventions de 
+codage pour le projet SOSIE2.\\
+Ce document est réalisé en \LaTeX{} et est modifiable à partir du fichier 
+\begin{lstlisting}[language=c]
+	$ /Documentation/modifiables/ConventionsDeCodage.tex
+\end{lstlisting}
+\\
+Les conventions seront fixées au fur et à mesure par les équipes de développement 
+des sprints. Les points possibles sont :
+\begin{description}
+	\item nommage des variables
+	\item nommage des fonctions
+	\item indentation
+	\item ...
+\end{description}
+Une fois le document \itshape{.tex} modifié, utilisez la commande :
+\begin{lstlisting}[language=c]
+	$ pdflatex *.tex
+\end{lstlisting}
+afin de générer le document pdf à placer dans le répertoire \itshape{/Documentation}.
+\end{document}                 % The input file ends with this command.
