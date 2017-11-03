@@ -1,8 +1,11 @@
 package com.architecture.logicielle.service;
 
+import org.springframework.stereotype.Service;
+
 import com.architecture.logicielle.mvc.data.UserView;
 import com.architecture.logicielle.repository.UserRepository;
 import com.architecture.logicielle.repository.entities.UserEntity;
+
 
 public class UserServiceImpl implements UserService {
 
