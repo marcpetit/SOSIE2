@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,7 @@ import com.architecture.logicielle.mvc.data.UserView;
 import com.architecture.logicielle.repository.UserRepository;
 import com.architecture.logicielle.repository.entities.UserEntity;
 import com.architecture.logicielle.service.UserService;
+
 import com.architecture.logicielle.service.UserServiceImpl;
 
 @Controller
@@ -39,22 +41,30 @@ public class WebController extends WebMvcConfigurerAdapter {
 	@GetMapping("/")
 	public String showHomePage(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Long id = Long.parseLong(auth.getName());
-		UserEntity userEnt = userService.GetUserById(id, userRepository);
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		System.out.println("Username = " + user.getUsername());
+		System.out.println("Password = " + user.getPassword());
+
+		//Long id = Long.parseLong(auth.getName());
+		UserEntity userEnt = userService.GetUserById((long)1, userRepository);
 		UserView userView = userService.parseUserEntityToUserView(userEnt);
 		model.addAttribute("userView", userView);
+		System.out.println("GET ON /");
 		return "consultUser";
 	}
 
 	@GetMapping("/inscription")
 	public String showFromInscription(Model model) {
 		model.addAttribute("user", new UserView());
+		System.out.println("GET ON inscription");
+
 		return "inscription";
 	}
 
 	@PostMapping("/inscription")
 	public String InscriptionSubmit(Model model, @ModelAttribute @Valid UserView user, BindingResult bindingResult) {
 		model.addAttribute("user", user);
+		System.out.println("POST ON inscription");
 
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("ErrorMessage", "Inalid from !");
@@ -75,6 +85,7 @@ public class WebController extends WebMvcConfigurerAdapter {
 	
 	@GetMapping("/edit")
 	public String showEditPage(Model model) {
+		System.out.println("GET ON edit");
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Long id = Long.parseLong(auth.getName());
 		UserEntity userEnt = userService.GetUserById(id, userRepository);
@@ -86,6 +97,9 @@ public class WebController extends WebMvcConfigurerAdapter {
 	@PostMapping("/edit")
 	public String EditProfileSubmit(Model model, @ModelAttribute @Valid UserView user,
 			BindingResult bindingResult) {
+		
+		System.out.println("POST ON edit");
+
 
 		model.addAttribute("user", user);
 		if (bindingResult.hasErrors()) {

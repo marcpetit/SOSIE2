@@ -12,5 +12,5 @@ import com.architecture.logicielle.repository.entities.UserEntity;
 // CRUD refers Create, Read, Update, Delete
 
 public interface UserRepository extends CrudRepository<UserEntity, Long> {
-	
+	UserEntity findOneByEmail(String email);
 }

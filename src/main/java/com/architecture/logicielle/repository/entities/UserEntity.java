@@ -3,6 +3,8 @@ package com.architecture.logicielle.repository.entities;
 import java.io.File;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,73 +12,38 @@ import javax.persistence.Table;
 @Entity // This tells Hibernate to make a table out of this class
 public class UserEntity {
 	
-	public UserEntity() {
-		
-	}
+	public UserEntity() {}
 	
-	public UserEntity(String firstName, String lastName, String statut, String mail, String password, File photo, Long username) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.statut = statut;
-		this.email = mail;
+	public UserEntity(long puid, String email, String password, String role) {
+		this.email = email;
 		this.password = password;
-		this.photo = photo;
-		this.username = username;
+		this.puid = puid;
+		this.role = role;
 	}
 
-	@Column(name = "firstName")
-    private String firstName;
-
-	@Column(name = "lastName")
-    private String lastName;
-	
 	@Id
-	@Column(name = "username")
-	private Long username;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long puid;
 	
-	@Column(name = "statut")
-    private String statut;
+	@Column(name = "email")
+	private String email;
 
-    @Column(name = "email")
-    private String email;
-    
     @Column(name = "password")
     private String password;
+    
+    @Column(name = "role")
+    private String role;
+    
+    public long getId() {
+    	return puid;
+    }
 
-    @Column(name = "photo")
-    private File photo;
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getStatut() {
-		return statut;
-	}
-
-	public void setStatut(String statut) {
-		this.statut = statut;
-	}
-
-	public String getMail() {
+	public String getEmail() {
 		return email;
 	}
 
-	public void setMail(String mail) {
-		this.email = mail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -86,33 +53,21 @@ public class UserEntity {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public File getPhoto() {
-		return photo;
+	
+	public long getPUID() {
+		return puid;
 	}
 
-	public void setPhoto(File photo) {
-		this.photo = photo;
+	public String getRole() {
+		// TODO Auto-generated method stub
+		return role;
 	}
+	
+	public void setRole(String role) {
+		// TODO Auto-generated method stub
+		this.role = role;
+	}
+	
+	
 
-	@Override
-	public String toString() {
-		return "User [firstName=" + firstName + ", lastName=" + lastName + "]";
-	}
-
-	public Long getUsername() {
-		return username;
-	}
-
-	public void setUsername(Long username) {
-		this.username = username;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 }

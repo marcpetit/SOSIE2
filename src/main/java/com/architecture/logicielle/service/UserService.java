@@ -12,4 +12,5 @@ public interface UserService {
 	public void deleteUser(UserEntity userEntity, UserRepository userRepository);
 	public UserEntity checkUser(UserEntity userEntity, UserRepository userRepository);
 	public UserEntity GetUserById(Long i, UserRepository userRepository);
+	public UserEntity GetUserByEmail(String email, UserRepository userRepository);
 }

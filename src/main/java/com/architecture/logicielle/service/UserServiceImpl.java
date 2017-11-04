@@ -10,13 +10,9 @@ public class UserServiceImpl implements UserService {
 	public UserEntity parseUserViewToUserEntity(UserView userview) {
 
 		UserEntity userEnt = new UserEntity();
-		userEnt.setFirstName(userview.getFirstName());
-		userEnt.setLastName(userview.getLastName());
-		userEnt.setUsername(userview.getUsername());
-		userEnt.setMail(userview.getMail());
+		userEnt.setEmail(userview.getEmail());
 		userEnt.setPassword(userview.getPassword());
-		userEnt.setPhoto(userview.getPhoto());
-		userEnt.setStatut(userview.getStatut());
+		userEnt.setRole(userview.getRole());
 
 		return userEnt;
 	}
@@ -29,7 +25,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserEntity checkUser(UserEntity userEntity, UserRepository userRepository) {
 		UserEntity user = new UserEntity();
-		user = userRepository.findOne(userEntity.getUsername());
+		user = userRepository.findOne(userEntity.getPUID());
 		return user;
 	}
 
@@ -38,20 +34,24 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findOne(id);
 		
 	}
+	
+	@Override
+	public UserEntity GetUserByEmail(String email, UserRepository userRepository) {
+		System.out.println("Searching the email : " + email + "...");
+		return userRepository.findOneByEmail(email);
+		
+	}
 
 	@Override
-	public UserView parseUserEntityToUserView(UserEntity userentity) {
+	public UserView parseUserEntityToUserView(UserEntity userEntity) {
 
-		UserView userview = new UserView();
-		userview.setFirstName(userentity.getFirstName());
-		userview.setLastName(userentity.getLastName());
-		userview.setUsername(userentity.getUsername());
-		userview.setMail(userentity.getMail());
-		userview.setPassword(userentity.getPassword());
-		userview.setPhoto(userentity.getPhoto());
-		userview.setStatut(userentity.getStatut());
+		UserView userView = new UserView();
+		userView.setPUID(userEntity.getPUID());
+		userView.setEmail(userEntity.getEmail());
+		userView.setPassword(userEntity.getPassword());
+		userView.setRole(userEntity.getRole());
 
-		return userview;
+		return userView;
 	}
 
 	@Override

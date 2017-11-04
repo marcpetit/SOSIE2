@@ -2,17 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Projet ArchiLogicielle</title>
-	
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<!-- Bootstrap core CSS -->
     <link href="bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 
     <!-- Custom styles for this template -->
     <link href="bootstrap/css/modern-business.css" rel="stylesheet"/>
-		
+
 	</head>
     <body>
-	
+
 	<!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
       <div class="container">
@@ -27,37 +27,16 @@
 	<div class="alert alert-danger" role="alert" th:if="${ErrorMessage}" th:utext="${ErrorMessage}"><strong>Aucun champs doit être vide !</strong></div>
 	<form action="#" th:action="@{'/edit'}" th:object="${user}" method="post">
             <table>
-                <tr>
-                    <td>firstName:</td>
-                    <td><input type="text" th:field="*{firstName}" /></td>
-                    <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">FirstName Error</td>
+                    <td>Email:</td>
+                    <td><input type="text" th:field="*{email}" /></td>
+                    <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Mail Error</td>
                 </tr>
                 <tr>
-                    <td>lastName:</td>
-                    <td><input type="text" th:field="*{lastName}"/></td>
-                    <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">LastName Error</td>
-                </tr>
-                <tr>
-                    <td>Mail:</td>
-                    <td><input type="text" th:field="*{mail}" /></td>
-                    <td th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}">Mail Error</td>
-                </tr>
-                <tr>
-                    <td>Statut:</td>
-                    <td>Student <input type="radio" name="x" value="Student" th:field="*{statut}"/>
-  					Teacher<input type="radio" name="x" value="teacher" th:field="*{statut}"/>
-  					Administrator<input type="radio" name="x" value="Administrator" th:field="*{statut}"/></td>
-  					<td th:if="${#fields.hasErrors('statut')}" th:errors="*{statut}">Statut Error</td>
-                </tr>
-                <tr>
-                    <td>icone:</td>
-                    <td><input type="file" th:field="*{photo}"/></td>
-                    <td th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}">photo Error</td>
-                </tr>
-                <tr>
-                    <td>Id:</td>
-                    <td><input type="text" th:field="*{username}" /></td>
-                    <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Id Error</td>
+                    <td>Role:</td>
+                    <td>Student <input type="radio" name="x" value="Student" th:field="*{role}"/>
+  					Teacher<input type="radio" name="x" value="teacher" th:field="*{role}"/>
+  					Administrator<input type="radio" name="x" value="Administrator" th:field="*{role}"/></td>
+  					<td th:if="${#fields.hasErrors('role')}" th:errors="*{role}">Statut Error</td>
                 </tr>
                 <tr>
                     <td>Password:</td>
@@ -78,6 +57,6 @@
  	<!-- Footer -->
     <footer class="py-3 bg-dark">
         <p class="m-0 text-center text-white">Copyright &copy; ISTY 2017</p>
-    </footer>  
+    </footer>
     </body>
 </html>

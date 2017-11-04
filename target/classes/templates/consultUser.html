@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Projet ArchiLogicielle</title>
-	
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<!-- Bootstrap core CSS -->
     <link href="bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 
     <!-- Custom styles for this template -->
     <link href="bootstrap/css/modern-business.css" rel="stylesheet"/>
-		
+
 	</head>
 <body>
 <!-- Navigation -->
@@ -30,28 +30,15 @@
     </nav>
 	<div class="container">
 	<br/>
-    <h1 th:text="'Bienvenue: ' + ${userView.firstName} + ' '+ ${userView.lastName}" ></h1>
-    <p th:text="'photo: ' + ${userView.photo}" />
+    <h1 th:text="'Bienvenue: ' + ${userView.email} " ></h1>
     <table>
-                <tr>
-                    <td>firstName:</td>
-                    <td th:text=" ${userView.firstName}"></td>
-                </tr>
-                <tr>
-                    <td>lastName:</td>
-                    <td th:text=" ${userView.lastName}"></td>
-                </tr>
-                <tr>
+								<tr>
                     <td>Mail:</td>
-                    <td th:text=" ${userView.mail}"></td>
+                    <td th:text=" ${userView.email}"></td>
                 </tr>
                 <tr>
-                    <td>Statut:</td>
-                    <td th:text=" ${userView.statut}"></td>
-                </tr>
-                <tr>
-                    <td>Identifiant:</td>
-                    <td th:text=" ${userView.username}"></td>
+                    <td>Role:</td>
+                    <td th:text=" ${userView.role}"></td>
                 </tr>
                 <tr>
                     <td>Password:</td>
@@ -59,7 +46,7 @@
                 </tr>
                 <tr>
                     <td><a th:href="@{'/edit'}" href="#">Editer </a></td>
-                    <td><a th:href="@{'/DeleteProfile/'+${userView.username}}" href="#"> Supprimer</a></td>
+                    <td><a th:href="@{'/DeleteProfile/'+${userView.email}}" href="#"> Supprimer</a></td>
                 </tr>
     	</table>
     	<br/>
@@ -71,6 +58,6 @@
     	<!-- Footer -->
     <footer class="py-3 bg-dark">
         <p class="m-0 text-center text-white">Copyright &copy; ISTY 2017</p>
-    </footer>  
+    </footer>
 </body>
 </html>
