@@ -99,6 +99,7 @@ public class WebController extends WebMvcConfigurerAdapter {
 			BindingResult bindingResult) {
 		
 		System.out.println("POST ON edit");
+		System.out.println(user);
 
 
 		model.addAttribute("user", user);
@@ -106,7 +107,9 @@ public class WebController extends WebMvcConfigurerAdapter {
 			model.addAttribute("ErrorMessage", "Invalid form!");
 			return "editUser";
 		} else {
+			System.out.println("POST EDIT ELSE");
 			UserEntity userEnt = userService.parseUserViewToUserEntity(user);
+			System.out.println(userEnt);
 			userService.saveUser(userEnt, userRepository);
 			return "redirect:/";
 		}

@@ -66,8 +66,5 @@ public class UserView {
 	public String getRole() {
 		return role;
 	}
-	
-	
 
-	
 }
