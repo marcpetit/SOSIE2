@@ -27,6 +27,7 @@
 	<div class="alert alert-danger" role="alert" th:if="${ErrorMessage}" th:utext="${ErrorMessage}"><strong>Aucun champs doit être vide !</strong></div>
 	<form action="#" th:action="@{'/edit'}" th:object="${user}" method="post">
             <table>
+							<tr>
                     <td>Email:</td>
                     <td><input type="text" th:field="*{email}" /></td>
                     <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Mail Error</td>

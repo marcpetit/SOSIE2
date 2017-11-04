@@ -43,10 +43,9 @@ public class WebController extends WebMvcConfigurerAdapter {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		System.out.println("Username = " + user.getUsername());
-		System.out.println("Password = " + user.getPassword());
-
-		//Long id = Long.parseLong(auth.getName());
-		UserEntity userEnt = userService.GetUserById((long)1, userRepository);
+		// Long id = Long.parseLong(auth.getName());
+		// UserEntity userEnt = userService.GetUserById((long)1, userRepository);
+		UserEntity userEnt = userService.GetUserByEmail(auth.getName(), userRepository);
 		UserView userView = userService.parseUserEntityToUserView(userEnt);
 		model.addAttribute("userView", userView);
 		System.out.println("GET ON /");
@@ -87,8 +86,9 @@ public class WebController extends WebMvcConfigurerAdapter {
 	public String showEditPage(Model model) {
 		System.out.println("GET ON edit");
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Long id = Long.parseLong(auth.getName());
-		UserEntity userEnt = userService.GetUserById(id, userRepository);
+		// Long id = Long.parseLong(auth.getName());
+		// UserEntity userEnt = userService.GetUserById(id, userRepository);
+		UserEntity userEnt = userService.GetUserByEmail(auth.getName(), userRepository);
 		UserView userView = userService.parseUserEntityToUserView(userEnt);
 		model.addAttribute("user", userView);
 		return "editUser";
@@ -103,7 +103,7 @@ public class WebController extends WebMvcConfigurerAdapter {
 
 		model.addAttribute("user", user);
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("ErrorMessage", "Inalid from !");
+			model.addAttribute("ErrorMessage", "Invalid form!");
 			return "editUser";
 		} else {
 			UserEntity userEnt = userService.parseUserViewToUserEntity(user);
@@ -113,10 +113,12 @@ public class WebController extends WebMvcConfigurerAdapter {
 	}
 
 	@GetMapping("/DeleteProfile/{userId}")
-	public String DeleteUsert(@PathVariable Long userId, Model model, @ModelAttribute UserView user) {
+	public String DeleteUsert(@PathVariable String email, Model model, @ModelAttribute UserView user) {
 		// fermer la session avant de supprimer le user
 		SecurityContextHolder.clearContext();
-		UserEntity userEnt = userService.GetUserById(userId, userRepository);
+		UserEntity userEnt = userService.GetUserByEmail(email, userRepository);
+
+		//UserEntity userEnt = userService.GetUserById(userId, userRepository);
 		userService.deleteUser(userEnt, userRepository);
 
 		return "redirect:/login";
