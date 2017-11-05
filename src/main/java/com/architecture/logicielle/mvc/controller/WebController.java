@@ -87,23 +87,50 @@ public class WebController extends WebMvcConfigurerAdapter {
 		return "editUser";
 	}
 
+//	@PostMapping("/edit")
+//	public String EditProfileSubmit(Model model, @ModelAttribute @Valid UserView user,
+//			BindingResult bindingResult) {
+//		
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		UserEntity u = userService.GetUserByEmail(auth.getName(), userRepository);
+//		long puid = u.getPUID();
+//		user.setPUID(puid);
+//
+//		model.addAttribute("user", user);
+//		if (bindingResult.hasErrors()) {
+//			model.addAttribute("ErrorMessage", "Invalid form!");
+//			return "editUser";
+//		} else {
+//			UserEntity userEnt = userService.parseUserViewToUserEntity(user);
+//			System.out.println(user.toString());
+//			userService.saveUser(userEnt, userRepository);
+//			return "redirect:/";
+//		}
+//	}
+	
 	@PostMapping("/edit")
 	public String EditProfileSubmit(Model model, @ModelAttribute @Valid UserView user,
 			BindingResult bindingResult) {
 		
+		// Get authenticated user
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserEntity u = userService.GetUserByEmail(auth.getName(), userRepository);
+		// Set puid in the view
 		long puid = u.getPUID();
 		user.setPUID(puid);
-
 		model.addAttribute("user", user);
+		
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("ErrorMessage", "Invalid form!");
 			return "editUser";
 		} else {
-			UserEntity userEnt = userService.parseUserViewToUserEntity(user);
-			System.out.println(user.toString());
-			userService.saveUser(userEnt, userRepository);
+			// Done like that because saveUser was not updating the current user
+			// but was creating a new user with the infos from the view
+			UserEntity editedUser = userService.parseUserViewToUserEntity(user);
+			// Currently we can't change the user email
+			u.setRole(editedUser.getRole());
+			u.setPassword(editedUser.getPassword());
+			userService.saveUser(u, userRepository);
 			return "redirect:/";
 		}
 	}
