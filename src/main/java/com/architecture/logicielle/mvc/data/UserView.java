@@ -55,16 +55,23 @@ public class UserView {
 		this.password = password;
 	}
 
+	public long getPUID() {
+		return puid;
+	}
+	
 	public void setPUID(long puid) {
 		this.puid = puid;
 	}
-	
 	public void setRole(String role) {
 		this.role = role;
 	}
 	
 	public String getRole() {
 		return role;
+	}
+	
+	public String toString() {
+		return "Email = " + this.getEmail() + " | PUID = " + this.getPUID() + " | password = " + this.getPassword();
 	}
 
 }

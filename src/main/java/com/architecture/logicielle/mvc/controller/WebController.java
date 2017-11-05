@@ -42,13 +42,9 @@ public class WebController extends WebMvcConfigurerAdapter {
 	public String showHomePage(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		System.out.println("Username = " + user.getUsername());
-		// Long id = Long.parseLong(auth.getName());
-		// UserEntity userEnt = userService.GetUserById((long)1, userRepository);
 		UserEntity userEnt = userService.GetUserByEmail(auth.getName(), userRepository);
 		UserView userView = userService.parseUserEntityToUserView(userEnt);
 		model.addAttribute("userView", userView);
-		System.out.println("GET ON /");
 		return "consultUser";
 	}
 
@@ -84,10 +80,7 @@ public class WebController extends WebMvcConfigurerAdapter {
 	
 	@GetMapping("/edit")
 	public String showEditPage(Model model) {
-		System.out.println("GET ON edit");
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		// Long id = Long.parseLong(auth.getName());
-		// UserEntity userEnt = userService.GetUserById(id, userRepository);
 		UserEntity userEnt = userService.GetUserByEmail(auth.getName(), userRepository);
 		UserView userView = userService.parseUserEntityToUserView(userEnt);
 		model.addAttribute("user", userView);
@@ -98,30 +91,32 @@ public class WebController extends WebMvcConfigurerAdapter {
 	public String EditProfileSubmit(Model model, @ModelAttribute @Valid UserView user,
 			BindingResult bindingResult) {
 		
-		System.out.println("POST ON edit");
-		System.out.println(user);
-
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserEntity u = userService.GetUserByEmail(auth.getName(), userRepository);
+		long puid = u.getPUID();
+		user.setPUID(puid);
 
 		model.addAttribute("user", user);
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("ErrorMessage", "Invalid form!");
 			return "editUser";
 		} else {
-			System.out.println("POST EDIT ELSE");
 			UserEntity userEnt = userService.parseUserViewToUserEntity(user);
-			System.out.println(userEnt);
+			System.out.println(user.toString());
 			userService.saveUser(userEnt, userRepository);
 			return "redirect:/";
 		}
 	}
 
-	@GetMapping("/DeleteProfile/{userId}")
+	@GetMapping("/DeleteProfile/{email}")
 	public String DeleteUsert(@PathVariable String email, Model model, @ModelAttribute UserView user) {
-		// fermer la session avant de supprimer le user
-		SecurityContextHolder.clearContext();
-		UserEntity userEnt = userService.GetUserByEmail(email, userRepository);
+		// Get user currently authenticated
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserEntity u = userService.GetUserByEmail(auth.getName(), userRepository);
+		
+		SecurityContextHolder.clearContext(); // Close auth session
+		UserEntity userEnt = userService.GetUserByEmail(u.getEmail(), userRepository);
 
-		//UserEntity userEnt = userService.GetUserById(userId, userRepository);
 		userService.deleteUser(userEnt, userRepository);
 
 		return "redirect:/login";

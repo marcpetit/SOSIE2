@@ -34,9 +34,6 @@ public class UserEntity {
     @Column(name = "role")
     private String role;
     
-    public long getId() {
-    	return puid;
-    }
 
 	public String getEmail() {
 		return email;
@@ -66,6 +63,10 @@ public class UserEntity {
 	public void setRole(String role) {
 		// TODO Auto-generated method stub
 		this.role = role;
+	}
+	
+	public String toString() {
+		return "Email = " + this.getEmail() + " | PUID = " + this.getPUID() + " | password = " + this.getPassword();
 	}
 	
 	
