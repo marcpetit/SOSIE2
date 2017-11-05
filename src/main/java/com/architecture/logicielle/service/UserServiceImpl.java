@@ -13,6 +13,7 @@ public class UserServiceImpl implements UserService {
 		userEnt.setEmail(userview.getEmail());
 		userEnt.setPassword(userview.getPassword());
 		userEnt.setRole(userview.getRole());
+		//userEnt.setPromoID(userview.getPromoID());
 
 		return userEnt;
 	}
@@ -37,9 +38,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public UserEntity GetUserByEmail(String email, UserRepository userRepository) {
-		System.out.println("Searching the email : " + email + "...");
 		return userRepository.findOneByEmail(email);
-		
 	}
 
 	@Override

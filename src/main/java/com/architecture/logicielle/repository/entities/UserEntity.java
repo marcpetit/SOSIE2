@@ -2,7 +2,7 @@ package com.architecture.logicielle.repository.entities;
 
 import java.io.File;
 import javax.persistence.Column;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,14 +34,20 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
     
-    @Column(name = "role")
+    public PromoEntity getPromoID() {
+		return promoID;
+	}
+
+	public void setPromoID(PromoEntity promoID) {
+		this.promoID = promoID;
+	}
+
+	@Column(name = "role")
     private String role;
     
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "promoID")
     private PromoEntity promoID;
-    
-
     
 
 	public String getEmail() {

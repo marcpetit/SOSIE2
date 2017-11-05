@@ -2,6 +2,8 @@ package com.architecture.logicielle.mvc.data;
 
 import javax.validation.constraints.NotNull;
 
+import com.architecture.logicielle.repository.entities.PromoEntity;
+
 
 public class UserView {
 	
@@ -14,11 +16,12 @@ public class UserView {
 		usr1.password = usr2.password;
 	}
 
-	public UserView(long puid, String email, String password, String role) {
+	public UserView(long puid, String email, String password, String role, long promoID) {
 		this.puid = puid;
 		this.email = email;
 		this.password = password;
 		this.role = role;
+		this.promoID = promoID; 
 	}
 	
 	
@@ -33,6 +36,9 @@ public class UserView {
     
     @NotNull
     private String role;
+    
+    @NotNull
+    private long promoID;
 
 	public String getEmail() {
 		return email;
@@ -65,6 +71,15 @@ public class UserView {
 		return role;
 	}
 	
+
+	public long getPromoID() {
+		return promoID;
+	}
+
+	public void setPromoID(long promoID) {
+		this.promoID = promoID;
+	}
+
 	public String toString() {
 		return "Email = " + this.getEmail() + " | PUID = " + this.getPUID() + " | password = " + this.getPassword();
 	}

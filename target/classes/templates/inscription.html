@@ -53,6 +53,11 @@
                     <td><input type="password" th:field="*{password}" class="form-control" /></td>
                     <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
                 </tr>
+								<tr>
+									<td>Promotion:</td>
+									<td><input type="text" th:field="*{promoID}" class="form-control" /></td>
+									<td th:if="${#fields.hasErrors('promoID')}" th:errors="*{promoID}">Password Error</td>
+								</tr>
                 <tr>
                     <td><button style="margin-top:10px" class="btn btn-default" type="submit">Submit</button></td>
                 </tr>

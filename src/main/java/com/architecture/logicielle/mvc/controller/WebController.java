@@ -71,27 +71,16 @@ public class WebController extends WebMvcConfigurerAdapter {
 		model.addAttribute("promo", promoView);
 		System.out.println("Model after addAtribute = " + model);
 		System.out.println(model.toString());
-
-//		if (bindingResult.hasErrors()) {
-//			model.addAttribute("ErrorMessage", "Invalid form!");
-//			return "inscription";
-//		} else {
-//			PromoEntity promoEntity = promoService.parsePromoViewToPromoEntity(promoView);
-//			System.out.println(promoEntity.toString());
-//			PromoEntity promoEntityCheck = promoService.checkPromo(promoEntity, promoRepository);
-//			if (promoEntityCheck == null) {
-//				promoService.savePromo(promoEntity, promoRepository);
-//			} else {
-//				model.addAttribute("ErrorMessage", "Promo" + promoEntity.getPromoName() + " already exists!");
-//				return "createPromo";
-//			}
-//		}
-		//return "redirect:/";
-		PromoEntity promoEntity = promoService.parsePromoViewToPromoEntity(promoView);
-		promoService.savePromo(promoEntity, promoRepository);
-
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("ErrorMessage", "Invalid form!");
+		} else {
+			PromoEntity promoEntity = promoService.parsePromoViewToPromoEntity(promoView);
+			promoService.savePromo(promoEntity, promoRepository);
+		}
 		return "redirect:/createPromo";
 	}
+
+
 	
 	@GetMapping("/inscription")
 	public String showFromInscription(Model model) {
@@ -105,12 +94,15 @@ public class WebController extends WebMvcConfigurerAdapter {
 	public String InscriptionSubmit(Model model, @ModelAttribute @Valid UserView user, BindingResult bindingResult) {
 		model.addAttribute("user", user);
 		System.out.println("POST ON inscription");
-
+		System.out.println("--------" + user.getPromoID());
+		PromoEntity promoEntity = promoRepository.findOne(user.getPromoID());
+		
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("ErrorMessage", "Invalid form!");
 			return "inscription";
 		} else {
 			UserEntity userEnt = userService.parseUserViewToUserEntity(user);
+			userEnt.setPromoID(promoEntity);
 			UserEntity userEntCheck = userService.checkUser(userEnt, userRepository);
 			if (userEntCheck == null) {
 				userService.saveUser(userEnt, userRepository);
