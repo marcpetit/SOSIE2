@@ -4,6 +4,7 @@ import com.architecture.logicielle.mvc.data.UserView;
 import com.architecture.logicielle.repository.UserRepository;
 import com.architecture.logicielle.repository.entities.UserEntity;
 
+
 public interface UserService {
 	
 	public UserEntity parseUserViewToUserEntity(UserView userview);  
@@ -14,3 +15,4 @@ public interface UserService {
 	public UserEntity GetUserById(Long i, UserRepository userRepository);
 	public UserEntity GetUserByEmail(String email, UserRepository userRepository);
 }
+

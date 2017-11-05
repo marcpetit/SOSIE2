@@ -1,16 +1,15 @@
 package com.architecture.logicielle.repository.entities;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.ArrayList;
+
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import antlr.collections.List;
 
 @Table(name = "promo")
 @Entity // This tells Hibernate to make a table out of this class
@@ -22,12 +21,11 @@ public class PromoEntity {
 	}
 	
 	
-	public PromoEntity(long promoID, String promoName, int year, ArrayList<Long> students ) {
+	public PromoEntity(long promoID, String promoName, int year) {
 		super();
 		this.promoID = promoID;
 		this.promoName = promoName;
 		this.year = year;
-		this.students = students;
 	}
 
 	@Id
@@ -40,9 +38,13 @@ public class PromoEntity {
 	@Column(name = "year")
     private int year;
 	
-	@Column(name = "students")
-	private ArrayList<Long> students;
+//	@OneToMany(mappedBy="promoID")
+//	private Set<UserEntity> student;
 
+	public long getPromoID() {
+		return promoID;
+	}
+	
 	public String getPromoName() {
 		return promoName;
 	}
@@ -58,13 +60,10 @@ public class PromoEntity {
 	public void setYear(int year) {
 		this.year = year;
 	}
-
-	public ArrayList<Long> getEleves() {
-		return students;
+	
+	public String toString() {
+		return "Name = " + this.getPromoName() + " | PromoID = " + this.getPromoID() + " | year = " + this.getYear();
 	}
-
-	public void setEleves(ArrayList<Long> students) {
-		this.students = students;
-	}
+	
 
 }

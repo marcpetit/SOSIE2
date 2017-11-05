@@ -2,6 +2,8 @@ package com.architecture.logicielle.repository.entities;
 
 import java.io.File;
 import javax.persistence.Column;
+import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,11 +16,12 @@ public class UserEntity {
 	
 	public UserEntity() {}
 	
-	public UserEntity(long puid, String email, String password, String role) {
+	public UserEntity(long puid, String email, String password, String role, PromoEntity promoID) {
 		this.email = email;
 		this.password = password;
 		this.puid = puid;
 		this.role = role;
+		this.promoID = promoID;
 	}
 
 	@Id
@@ -33,6 +36,12 @@ public class UserEntity {
     
     @Column(name = "role")
     private String role;
+    
+    @OneToOne
+    @JoinColumn(name = "promoID")
+    private PromoEntity promoID;
+    
+
     
 
 	public String getEmail() {

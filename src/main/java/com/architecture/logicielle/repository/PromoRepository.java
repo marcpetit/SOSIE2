@@ -1,11 +1,11 @@
 package com.architecture.logicielle.repository;
 
 import org.springframework.data.repository.CrudRepository;
-import com.architecture.logicielle.repository.entities.UserEntity;
+import com.architecture.logicielle.repository.entities.PromoEntity;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
 
-public interface UserRepository extends CrudRepository<UserEntity, Long> {
-	UserEntity findOneByEmail(String email);
+public interface PromoRepository extends CrudRepository<PromoEntity, Long> {
+//	PromoEntity findPromoByName(String promoName);
 }
