@@ -1,7 +1,7 @@
 package com.architecture.logicielle.repository.entities;
 
 
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,8 +38,8 @@ public class PromoEntity {
 	@Column(name = "year")
     private int year;
 	
-//	@OneToMany(mappedBy="promoID")
-//	private Set<UserEntity> student;
+	@OneToMany(mappedBy="promoID")
+	private Collection<UserEntity> student;
 
 	public long getPromoID() {
 		return promoID;

@@ -64,22 +64,22 @@ public class WebController extends WebMvcConfigurerAdapter {
 	
 	@PostMapping("/createPromo")
 	public String CreatePromoSubmit(Model model, @ModelAttribute @Valid PromoView promoView, BindingResult bindingResult) {
-		System.out.println(model);
-
-		System.out.println("POST CREATE PROMO");
-
-		model.addAttribute("promo", promoView);
-		System.out.println("Model after addAtribute = " + model);
-		System.out.println(model.toString());
+		
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("ErrorMessage", "Invalid form!");
 		} else {
 			PromoEntity promoEntity = promoService.parsePromoViewToPromoEntity(promoView);
-			promoService.savePromo(promoEntity, promoRepository);
+			PromoEntity promoEntityCheck = promoService.checkPromo(promoEntity, promoRepository);
+			
+			if (promoEntityCheck == null) {
+				promoService.savePromo(promoEntity, promoRepository);
+			} else {
+				model.addAttribute("ErrorMessage", "This promo already exists!");
+				return "createPromo";
+			}
 		}
-		return "redirect:/createPromo";
+		return "redirect:/login";
 	}
-
 
 	
 	@GetMapping("/inscription")

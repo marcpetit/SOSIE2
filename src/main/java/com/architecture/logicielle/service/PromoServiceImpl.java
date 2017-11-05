@@ -23,7 +23,7 @@ public class PromoServiceImpl implements PromoService {
 	@Override
 	public PromoEntity checkPromo(PromoEntity promoEntity, PromoRepository promoRepository) {
 		PromoEntity promoEnt = new PromoEntity();
-//		promoEnt = promoRepository.findPromoByName(promoEnt.getPromoName());
+		promoEnt = promoRepository.findOneByPromoName(promoEntity.getPromoName());
 		return promoEnt;
 	}
 
@@ -45,8 +45,7 @@ public class PromoServiceImpl implements PromoService {
 
 	@Override
 	public PromoEntity getPromoByName(String promoName, PromoRepository promoRepository) {
-		// TODO Auto-generated method stub
-		return null;
+		return promoRepository.findOneByPromoName(promoName);
 	}
 
 //	@Override

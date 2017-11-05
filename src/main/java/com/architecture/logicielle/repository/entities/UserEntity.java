@@ -34,13 +34,6 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
     
-    public PromoEntity getPromoID() {
-		return promoID;
-	}
-
-	public void setPromoID(PromoEntity promoID) {
-		this.promoID = promoID;
-	}
 
 	@Column(name = "role")
     private String role;
@@ -49,7 +42,16 @@ public class UserEntity {
     @JoinColumn(name = "promoID")
     private PromoEntity promoID;
     
+    // Getters and setters
+    
+    public PromoEntity getPromoID() {
+		return promoID;
+	}
 
+	public void setPromoID(PromoEntity promoID) {
+		this.promoID = promoID;
+	}
+    
 	public String getEmail() {
 		return email;
 	}

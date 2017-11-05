@@ -7,5 +7,6 @@ import com.architecture.logicielle.repository.entities.PromoEntity;
 // CRUD refers Create, Read, Update, Delete
 
 public interface PromoRepository extends CrudRepository<PromoEntity, Long> {
-//	PromoEntity findPromoByName(String promoName);
+	PromoEntity findOneByPromoName(String promoName);
+	
 }
