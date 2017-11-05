@@ -38,6 +38,7 @@
 	<div class="alert alert-danger" role="alert" th:if="${param.logout}">
   		<strong>You have been logged out. !</strong> Change a few things up and try submitting again.
 	</div>
+  <div class="alert alert-danger" role="alert" th:if="${ErrorMessage}" th:utext="${ErrorMessage}"></div>
         <form th:action="@{/createPromo}" th:object="${promo}" method="post">
         <table>
                 <tr>

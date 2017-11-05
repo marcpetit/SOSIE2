@@ -74,13 +74,12 @@ public class WebController extends WebMvcConfigurerAdapter {
 			if (promoEntityCheck == null) {
 				promoService.savePromo(promoEntity, promoRepository);
 			} else {
-				model.addAttribute("ErrorMessage", "This promo already exists!");
+				model.addAttribute("ErrorMessage", "A promo which is finishing this year already exists!");
 				return "createPromo";
 			}
 		}
 		return "redirect:/login";
 	}
-
 	
 	@GetMapping("/inscription")
 	public String showFromInscription(Model model) {

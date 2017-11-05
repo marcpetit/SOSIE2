@@ -23,7 +23,7 @@ public class PromoServiceImpl implements PromoService {
 	@Override
 	public PromoEntity checkPromo(PromoEntity promoEntity, PromoRepository promoRepository) {
 		PromoEntity promoEnt = new PromoEntity();
-		promoEnt = promoRepository.findOneByPromoName(promoEntity.getPromoName());
+		promoEnt = promoRepository.findOneByYear(promoEntity.getYear());
 		return promoEnt;
 	}
 
@@ -45,8 +45,14 @@ public class PromoServiceImpl implements PromoService {
 
 	@Override
 	public PromoEntity getPromoByName(String promoName, PromoRepository promoRepository) {
-		return promoRepository.findOneByPromoName(promoName);
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+//	@Override
+//	public PromoEntity getPromoByName(String promoName, PromoRepository promoRepository) {
+//		return promoRepository.findOneByPromoName(promoName);
+//	}
 
 //	@Override
 //	public PromoEntity getPromoByName(String promoName, PromoRepository promoRepository) {
