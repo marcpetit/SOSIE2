@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Projet ArchiLogicielle</title>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
+	<!-- Bootstrap core CSS -->
+    <link href="bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link href="bootstrap/css/modern-business.css" rel="stylesheet"/>
+		
+	</head>
+    <body>
+	
+	<!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Institut des Sciences et Techniques des Yvelines</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+ 	<div class="container">
+	<h1 th:text="'Gestion de stage de ' + ${userView.firstName} + ' '+ ${userView.lastName}"></h1>
+	<div class="alert alert-danger" role="alert" th:if="${ErrorMessage}" th:utext="${ErrorMessage}"><strong>Aucun champs doit être vide !</strong></div>
+	<form action="#" th:action="@{'/editStage'}" th:object="${stage}" method="post">
+            <table>
+                <tr>
+                    <td>Sujet :</td>
+                    <td><input type="text" th:field="*{sujet}" /></td>
+                    <td th:if="${#fields.hasErrors('sujet')}" th:errors="*{sujet}">Erreur sujet</td>
+                </tr>
+                <tr>
+                    <td>Entreprise :</td>
+                    <td><input type="text" th:field="*{nomEntreprise}"/></td>
+                    <td th:if="${#fields.hasErrors('nomEntreprise')}" th:errors="*{nomEntreprise}">Erreur nom d'entreprise</td>
+                </tr>
+                <tr>
+                    <td>Date de début : (AAAA/MM/JJ)</td>
+                    <td><input type="text" th:field="*{dateDebut}" /></td>
+                    <td th:if="${#fields.hasErrors('dateDebut')}" th:errors="*{dateDebut}">Erreur date de début du stage</td>
+                </tr>
+                <tr>
+                    <td>Date de fin : (AAAA/MM/JJ)</td>
+                    <td><input type="text" th:field="*{dateFin}" /></td>
+                    <td th:if="${#fields.hasErrors('dateFin')}" th:errors="*{dateFin}">Erreur date de fin du stage</td>
+                </tr>
+                <tr>
+                    <td>Enseignant référant :</td>
+                    <td><input type="text" th:field="*{usernameEnseignantReferant}"/></td>
+                    <td th:if="${#fields.hasErrors('usernameEnseignantReferant')}" th:errors="*{usernameEnseignantReferant}">Erreur lors de la saisie de l'enseignant référant</td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Edit" /></td>
+                     <td><a th:href="@{'/consultStage'}" href="#">Consulter stage</a></td>
+                </tr>
+            </table>
+        </form>
+        <br/>
+</div>
+ 	<!-- Footer -->
+    <footer class="py-3 bg-dark">
+        <p class="m-0 text-center text-white">Copyright &copy; ISTY 2017</p>
+    </footer>  
+    </body>
+</html>
