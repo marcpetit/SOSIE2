@@ -1,8 +1,8 @@
 package com.architecture.logicielle.repository.entities;
 
 import java.io.File;
-import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Table(name = "user")
 @Entity // This tells Hibernate to make a table out of this class
-public class UserEntity implements Serializable{
+public class UserEntity {
 	
 	public UserEntity() {
 		
@@ -34,7 +34,8 @@ public class UserEntity implements Serializable{
     private String lastName;
 	
 	@Id
-	@Column(name = "username")
+	@Basic(optional = false)
+	@Column(name = "username",unique=true, nullable = false)
 	private Long username;
 	
 	@Column(name = "statut")

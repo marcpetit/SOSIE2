@@ -25,6 +25,10 @@
               <a class="nav-link js-scroll-trigger" href="#"></a>
             </li>
           </ul>
+          <ul class="nav nav-tabs">
+			  <li role="presentation" class="active"><a th:href="@{/}" href="#">Profile</a></li>
+			  <li  role="presentation"><a th:href="@{/consultUe}" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Unité d'enseignement</a></li>
+		  </ul>
         </div>
       </div>
     </nav>
@@ -60,7 +64,6 @@
                 <tr>
                     <td><a th:href="@{'/edit'}" href="#">Editer </a></td>
                     <td><a th:href="@{'/DeleteProfile/'+${userView.username}}" href="#"> Supprimer</a></td>
-                    <td><a th:href="@{/ue}" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ajouter unité d'enseignemenet</a></td>
                 </tr>
     	</table>
     	<br/>

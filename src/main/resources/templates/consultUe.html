@@ -26,12 +26,16 @@ xmlns:layout="http://www.uLtaq.net.nz/thymeleaf/Layout">
               <a class="nav-link js-scroll-trigger" href="#"></a>
             </li>
           </ul>
+          <ul class="nav nav-tabs">
+			  <li role="presentation" class="active"><a th:href="@{/}" href="#">Profile</a></li>
+			  <li  role="presentation"><a th:href="@{/consultUe}" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Unité d'enseignement</a></li>
+		  </ul>
         </div>
       </div>
     </nav>
 	<div class="container">
 	<br/>
-	<h1>Unites d'Enseignement</h1>
+	<h1>Unites d'enseignement</h1>
 	<br/>
     <table >
 	    <table class="table table-bordered table-striped">
@@ -49,7 +53,7 @@ xmlns:layout="http://www.uLtaq.net.nz/thymeleaf/Layout">
 	        	<tr th:each="uee:${uEs}">
 	        		<td th:text="${uee.identifiant}"></td>
 	        		<td th:text="${uee.nom}"></td>
-	        		<td th:text="${uee.enseignantResponsable}"></td>
+	        		<td th:text="${uee.firstname}+' '+${uee.lastname}"></td>
 	        		<td th:text="${uee.description}"></td>
      		        <td class="text-center"><a th:href="@{'/editUe/'+${uee.identifiant}}" class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a th:href="@{'/DeleteUE/'+${uee.identifiant}}" class="btn btn-danger btn-xs"  href="#"> Del</a></td>
 
@@ -63,14 +67,13 @@ xmlns:layout="http://www.uLtaq.net.nz/thymeleaf/Layout">
     	<br/>
     	
          <div id="formulaire">        
-                     <form th:action="@{'/'}" >
-            		 <input type="submit" value="Sortir"/>
-            	   	 </form>
-                
-             
-                   	<form th:action="@{/logout}" method="post">
-		            <input type="submit" value="deconnexion"/>
-		       		</form>
+	         <form th:action="@{'/ue'}" >
+	 		 <input type="submit" value="Ajouter"/>
+	 	   	 </form>
+	 	   	 
+	     	 <form th:action="@{/logout}" method="post">
+	         <input type="submit" value="Deconnexion"/>
+	         </form>
                 
         </div>
     	

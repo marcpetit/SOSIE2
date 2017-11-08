@@ -4,6 +4,8 @@ package com.architecture.logicielle.mvc.data;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.architecture.logicielle.repository.entities.UserEntity;
+
 import javax.persistence.Id;
 
 
@@ -21,30 +23,31 @@ public class UniteEnseignementView {
 
 	@NotNull
     @Size(min=2, max=30)
-    private String enseignantResponsable;
+    private String firstname;
+	
+	@NotNull
+    @Size(min=2, max=30)
+    private String lastname;
 
     @NotNull
     private String description;
+    
+    
 	
 	
 	
-	public UniteEnseignementView() {
-		
-	}
+	
 	
 	public UniteEnseignementView(UniteEnseignementView ue1, UniteEnseignementView ue2) {
 		ue1.identifiant = ue2.identifiant;
 		ue1.nom = ue2.nom;
-		ue1.enseignantResponsable = ue2.enseignantResponsable;
+		ue1.firstname = ue2.firstname;
+		ue1.lastname = ue2.lastname;
 		ue1.description = ue2.description;
 	}
 
-	public UniteEnseignementView(String identifiant, String nom, String enseignantResponsable, String description) {
+	public UniteEnseignementView() {
 		super();
-		this.identifiant = identifiant;
-		this.nom = nom;
-		this.enseignantResponsable = enseignantResponsable;
-		this.description = description;
 	}
 
 	public String getIdentifiant() {
@@ -63,12 +66,22 @@ public class UniteEnseignementView {
 		this.nom = nom;
 	}
 
-	public String getEnseignantResponsable() {
-		return enseignantResponsable;
+	
+
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setEnseignantResponsable(String enseignantResponsable) {
-		this.enseignantResponsable = enseignantResponsable;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public String getDescription() {
@@ -81,9 +94,13 @@ public class UniteEnseignementView {
 
 	@Override
 	public String toString() {
-		return "UniteEnseignementView [identifiant=" + identifiant + ", nom=" + nom + ", enseignantResponsable="
-				+ enseignantResponsable + ", description=" + description + "]";
+		return "UniteEnseignementView [identifiant=" + identifiant + ", nom=" + nom + ", firstname=" + firstname
+				+ ", lastname=" + lastname + ", description=" + description + "]";
 	}
+
+
+
+	
 
 	
 	

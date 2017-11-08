@@ -20,6 +20,17 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#"></a>
+            </li>
+          </ul>
+          <ul class="nav nav-tabs">
+			  <li role="presentation" class="active"><a th:href="@{/}" href="#">Profile</a></li>
+			  <li  role="presentation"><a th:href="@{/consultUe}" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Unité d'enseignement</a></li>
+		  </ul>
+        </div>
       </div>
     </nav>
  	<div class="container">
@@ -30,22 +41,28 @@
             <table>
                <tr>
                     <td>Identifiant :</td>
-                    <td><input type="text" th:field="*{identifiant}" /></td>
+                    <td><input type="text" th:field="*{identifiant}" class="form-control" /></td>
                     <td th:if="${#fields.hasErrors('identifiant')}" th:errors="*{identifiant}"> Identifiant</td>
                 </tr>
                 <tr>
                     <td>Nom :</td>
-                    <td><input type="text" th:field="*{nom}"/></td>
+                    <td><input type="text" th:field="*{nom}" class="form-control"/></td>
                     <td th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Nom</td>
                 </tr>
+                 <tr>
+                    <td>Enseignant Responsable:</td>
+                    <td><input type="text" th:field="*{firstname}" placeholder="First name" class="form-control" /></td>
+                    <td th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">First name Error</td>
+                   
+                </tr>
                 <tr>
-                    <td>Enseignant Responsable :</td>
-                    <td><input type="text" th:field="*{enseignantResponsable}" /></td>
-                    <td th:if="${#fields.hasErrors('enseignantResponsable')}" th:errors="*{enseignantResponsable}">Enseignant Responsable</td>
+                	 <td></td>
+                	 <td><input type="text" th:field="*{lastname}" placeholder="Last name" class="form-control"/></td>
+                     <td th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">LAst name Error</td>
                 </tr>
                 <tr>
                     <td>Description :</td>
-                    <td><input type="text" th:field="*{Description}" /></td>
+                    <td><input type="text" th:field="*{Description}" class="form-control"/></td>
                     <td th:if="${#fields.hasErrors('Description')}" th:errors="*{Description}">Description</td>
                 </tr>
                 <tr>

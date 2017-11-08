@@ -3,19 +3,18 @@ package com.architecture.logicielle.repository.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name = "ue")
 @Entity // This tells Hibernate to make a table out of this class
 public class UniteEnseignementEntity implements Serializable {
-	
-	public UniteEnseignementEntity() {
-		
-	}
-	
 	
 	@Id
 	@Column(name = "identifiant")
@@ -24,19 +23,29 @@ public class UniteEnseignementEntity implements Serializable {
 	@Column(name = "nom")
     private String nom;
 	
-	@Column(name = "enseignantResponsable")
-	private String enseignantResponsable;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name="enseignantResponsable")
+	private UserEntity enseignantResponsable;
 	
 	@Column(name = "description")
     private String description;
 
-	public UniteEnseignementEntity(String identifiant, String nom, String enseignantResponsable, String description) {
+	public UniteEnseignementEntity(String identifiant, String nom, UserEntity enseignantResponsable,
+			String description) {
 		super();
 		this.identifiant = identifiant;
 		this.nom = nom;
 		this.enseignantResponsable = enseignantResponsable;
 		this.description = description;
 	}
+
+	
+
+	public UniteEnseignementEntity() {
+		super();
+	}
+
+
 
 	public String getIdentifiant() {
 		return identifiant;
@@ -54,11 +63,11 @@ public class UniteEnseignementEntity implements Serializable {
 		this.nom = nom;
 	}
 
-	public String getEnseignantResponsable() {
+	public UserEntity getEnseignantResponsable() {
 		return enseignantResponsable;
 	}
 
-	public void setEnseignantResponsable(String enseignantResponsable) {
+	public void setEnseignantResponsable(UserEntity enseignantResponsable) {
 		this.enseignantResponsable = enseignantResponsable;
 	}
 
@@ -75,6 +84,10 @@ public class UniteEnseignementEntity implements Serializable {
 		return "UniteEnseignementEntity [identifiant=" + identifiant + ", nom=" + nom + ", enseignantResponsable="
 				+ enseignantResponsable + ", description=" + description + "]";
 	}
+	
+	
+
+	
 	
 	
 

@@ -20,6 +20,17 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+         <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#"></a>
+            </li>
+          </ul>
+          <ul class="nav nav-tabs">
+			  <li role="presentation" class="active"><a th:href="@{/}" href="#">Profile</a></li>
+			  <li  role="presentation"><a th:href="@{/consultUe}" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Unité d'enseignement</a></li>
+		  </ul>
+        </div>
       </div>
     </nav>
  	<div class="container">
@@ -41,8 +52,14 @@
                 </tr>
                 <tr>
                     <td>Enseignant Responsable:</td>
-                    <td><input type="text" th:field="*{enseignantResponsable}" class="form-control" /></td>
-                    <td th:if="${#fields.hasErrors('enseignantResponsable')}" th:errors="*{enseignantResponsable}">Enseignant Responsable Error</td>
+                    <td><input type="text" th:field="*{firstname}" class="form-control" placeholder="First name" /></td>
+                    <td th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">Enseignant Responsable Error</td>
+                   
+                </tr>
+                <tr>
+                	 <td></td>
+                	 <td><input type="text" th:field="*{lastname}" class="form-control" placeholder="Last name" /></td>
+                     <td th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Enseignant Responsable Error</td>
                 </tr>
                 <tr>
                     <td>Description:</td>
