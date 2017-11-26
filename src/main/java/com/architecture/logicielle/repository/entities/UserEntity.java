@@ -2,6 +2,8 @@ package com.architecture.logicielle.repository.entities;
 
 import java.io.File;
 
+import javax.persistence.Basic;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -33,7 +35,8 @@ public class UserEntity {
     private String lastName;
 	
 	@Id
-	@Column(name = "username")
+	@Basic(optional = false)
+	@Column(name = "username",unique=true, nullable = false)
 	private Long username;
 	
 	@Column(name = "statut") String statut;

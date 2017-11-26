@@ -1,8 +1,14 @@
 package com.architecture.logicielle.service;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.architecture.logicielle.mvc.data.UserView;
 import com.architecture.logicielle.repository.UserRepository;
 import com.architecture.logicielle.repository.entities.UserEntity;
+import com.mysql.fabric.xmlrpc.base.Array;
+
 
 public class UserServiceImpl implements UserService {
 
@@ -57,6 +63,30 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void deleteUser(UserEntity userEntity, UserRepository userRepository) {
 		userRepository.delete(userEntity);
+	}
+
+	@Override
+	public List<UserEntity> getAllTeachers(UserRepository userRepository) throws SQLException{
+		
+		List<UserEntity> teachers = new ArrayList<>();
+		for(UserEntity entity:userRepository.findAll())
+		{
+			if(entity.getStatut().equals("teacher"))
+				teachers.add(entity);
+		}
+		return teachers;
+	}
+
+	@Override
+	public UserEntity getUserByNAme(String first, String last, UserRepository userRepository) {
+		
+		for(UserEntity entity:userRepository.findAll())
+		{
+			if(entity.getFirstName().equals(first) && entity.getLastName().equals(last))
+				
+				return entity;
+		}
+		return null;
 	}
 
 }
