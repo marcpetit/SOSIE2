@@ -1,18 +1,18 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Projet ArchiLogicielle</title>
-	
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
-	<!-- Bootstrap core CSS -->
-    <link href="bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+<title>Projet ArchiLogicielle</title>
 
-    <!-- Custom styles for this template -->
-    <link href="bootstrap/css/modern-business.css" rel="stylesheet"/>
-		
-	</head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- Bootstrap core CSS -->
+<link href="bootstrap/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet" />
+
+<!-- Custom styles for this template -->
+<link href="bootstrap/css/modern-business.css" rel="stylesheet" />
+
+</head>
 <body>
-<!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="#page-top">Institut des Sciences et Techniques des Yvelines</a>
@@ -33,48 +33,54 @@
       </div>
     </nav>
 	<div class="container">
-	<br/>
-    <h1 th:text="'Bienvenue: ' + ${userView.firstName} + ' '+ ${userView.lastName}" ></h1>
-    <p th:text="'photo: ' + ${userView.photo}" />
-    <table>
-                <tr>
-                    <td>firstName:</td>
-                    <td th:text=" ${userView.firstName}"></td>
-                </tr>
-                <tr>
-                    <td>lastName:</td>
-                    <td th:text=" ${userView.lastName}"></td>
-                </tr>
-                <tr>
-                    <td>Mail:</td>
-                    <td th:text=" ${userView.mail}"></td>
-                </tr>
-                <tr>
-                    <td>Statut:</td>
-                    <td th:text=" ${userView.statut}"></td>
-                </tr>
-                <tr>
-                    <td>Identifiant:</td>
-                    <td th:text=" ${userView.username}"></td>
-                </tr>
-                <tr>
-                    <td>Password:</td>
-                    <td th:text=" ${userView.password}"></td>
-                </tr>
-                <tr>
-                    <td><a th:href="@{'/edit'}" href="#">Editer </a></td>
-                    <td><a th:href="@{'/DeleteProfile/'+${userView.username}}" href="#"> Supprimer</a></td>
-                </tr>
-    	</table>
-    	<br/>
-    	<form th:action="@{/logout}" method="post">
-            <input type="submit" value="deconnexion"/>
-    </form>
-    <br/>
-    	</div>
-    	<!-- Footer -->
-    <footer class="py-3 bg-dark">
-        <p class="m-0 text-center text-white">Copyright &copy; ISTY 2017</p>
-    </footer>  
+		<br />
+		<div class="alert alert-danger" role="alert" th:if="${ErrorMessage}"
+			th:utext="${ErrorMessage}"></div>
+
+		<h1
+			th:text="'Bienvenue: ' + ${userView.firstName} + ' '+ ${userView.lastName}"></h1>
+		<p th:text="'photo: ' + ${userView.photo}" />
+		<table>
+			<tr>
+				<td>firstName:</td>
+				<td th:text=" ${userView.firstName}"></td>
+			</tr>
+			<tr>
+				<td>lastName:</td>
+				<td th:text=" ${userView.lastName}"></td>
+			</tr>
+			<tr>
+				<td>Mail:</td>
+				<td th:text=" ${userView.mail}"></td>
+			</tr>
+			<tr>
+				<td>Statut:</td>
+				<td th:text=" ${userView.statut}"></td>
+			</tr>
+			<tr>
+				<td>Identifiant:</td>
+				<td th:text=" ${userView.username}"></td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td th:text=" ${userView.password}"></td>
+			</tr>
+			<tr>
+				<td><a th:href="@{'/edit'}" href="#">Editer </a></td>
+				<td><a th:href="@{'/consultStage'}" href="#">Stage</a></td>
+				<td><a th:href="@{'/DeleteProfile/'+${userView.username}}"
+					href="#"> Supprimer</a></td>
+			</tr>
+		</table>
+		<br />
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="deconnexion" />
+		</form>
+		<br />
+	</div>
+	<!-- Footer -->
+	<footer class="py-3 bg-dark">
+		<p class="m-0 text-center text-white">Copyright &copy; ISTY 2017</p>
+	</footer>
 </body>
 </html>

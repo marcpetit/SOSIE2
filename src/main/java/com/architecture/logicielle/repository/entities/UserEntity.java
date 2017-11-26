@@ -3,6 +3,7 @@ package com.architecture.logicielle.repository.entities;
 import java.io.File;
 
 import javax.persistence.Basic;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -38,8 +39,7 @@ public class UserEntity {
 	@Column(name = "username",unique=true, nullable = false)
 	private Long username;
 	
-	@Column(name = "statut")
-    private String statut;
+	@Column(name = "statut") String statut;
 
     @Column(name = "email")
     private String email;
@@ -49,6 +49,7 @@ public class UserEntity {
 
     @Column(name = "photo")
     private File photo;
+    
 
 	public String getFirstName() {
 		return firstName;
