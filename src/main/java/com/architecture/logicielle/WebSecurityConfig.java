@@ -1,9 +1,8 @@
 package com.architecture.logicielle;
 
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.encoding.LdapShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -14,8 +13,20 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	@Autowired
-	private DataSource dataSource;
+	
+	// parametres de connexion LDAP
+	
+	@Value("${ldap.urls}")
+	private String ldapUrls;
+	
+//	@Value("${ldap.base.dn}")
+//	private String ldapBaseDn;
+	
+	@Value("${ldap.group}")
+	private String ldapGroup;
+	
+	@Value("${ldap.user.dn.pattern}")
+	private String ldapUserDnPattern;
 	
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -26,6 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
         .formLogin()
             .loginPage("/login")
+            .failureUrl("/login?error")
             .permitAll()
             .and()
         .logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout");
@@ -41,12 +53,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth)
 			throws Exception {
-		auth.
-			jdbcAuthentication()
-				.dataSource(dataSource)
-				.usersByUsernameQuery("select username, password, true from architecture.user where architecture.user.username =?")
-				.authoritiesByUsernameQuery("select username, 'USER' from architecture.user where architecture.user.username =?");
-				
+		// authentification LDAP
+		auth
+		.ldapAuthentication()
+			.userDnPatterns(ldapUserDnPattern)
+			.groupSearchBase(ldapGroup)
+			.contextSource()
+				.url(ldapUrls)
+				.and()
+			.passwordCompare()
+				.passwordEncoder(new LdapShaPasswordEncoder())
+				.passwordAttribute("userPassword");	
 	}
 	
 }
