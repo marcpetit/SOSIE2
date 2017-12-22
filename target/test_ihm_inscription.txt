@@ -1,0 +1,15 @@
+     Test IHM INSCRIPTION 
+ 
+champs Firstname introuvable 
+ champs lastname en position 
+ champs mail en position 
+ champs Student  en position 
+ champs Teacher  en position 
+ champs Adminstrator en position 
+ Formulaires photo en position 
+ champs username en position 
+ champs password en position 
+ footer en position 
+ Bouton Submit en position  
+ Navbar en position  
+ Titre existe  

@@ -1,0 +1,7 @@
+    Test IHM Login 
+ 
+Formulaires Login/Mot de passe en position 
+ footer en position 
+ Bouton Submit en position  
+ Navbar en position  
+ Titre existe 
